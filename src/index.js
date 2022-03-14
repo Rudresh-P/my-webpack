@@ -4,4 +4,13 @@ const prototypeRancourRecepie = {
     swordBillet:1,
 }
 
+const amenomaKageuchiRecepie = {
+    amethystLump:50,
+    ...prototypeRancourRecepie,
+
+}
+
+
+
 console.log(prototypeRancourRecepie);
+console.log(amenomaKageuchiRecepie);
