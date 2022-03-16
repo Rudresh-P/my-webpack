@@ -1,3 +1,5 @@
+import "./styles/index.scss"
+
 const prototypeRancourRecepie = {
     crystalChunk:50,
     whiteIron: 50,
