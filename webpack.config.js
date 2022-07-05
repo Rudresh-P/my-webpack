@@ -1,5 +1,7 @@
 const path = require('path');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
 
@@ -9,13 +11,38 @@ module.exports = {
 
     entry: "./src/index.js",
 
+    // Output
+
+    output:{
+        path: path.resolve(__dirname, "dist"),
+        assetModuleFilename:"images/[hash][ext][query]",
+        filename: 'bundle.[contenthash].js'
+    },
+
+
     module:{
-        rules: [
+        rules: [           
+            
+
+            // Images
+            {
+                test: /\.(png|jpe?g|gif|svg)/i,
+                type: "asset",
+                // parser: {
+                //     dataUrlCondition : {
+                //         maxSize: 1 * 1024,
+                //     }
+                // }
+            },
+
             // CSS SASS SCSS
             {
                 test: /\.(s[ac]|c)ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: { publicPath : "" },
+                    },
                     "css-loader",
                     "postcss-loader",
                     "sass-loader"
@@ -35,7 +62,12 @@ module.exports = {
     },
 
     plugins:[
+        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin(),
+        new HtmlWebpackPlugin({
+            template:"./src/index.html"
+        })
+
     ],
 
     resolve:{
@@ -51,4 +83,4 @@ module.exports = {
 
         hot:true,
     }
-}
+};

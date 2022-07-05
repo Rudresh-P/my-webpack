@@ -1,2 +1,8 @@
 @use "global";
 
+.hero {
+    background: url("../images/pic.jpg");
+    background-color: antiquewhite;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
